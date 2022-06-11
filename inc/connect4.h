@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 20:26:44 by acabiac          ###   ########.fr       */
+/*   Updated: 2022/06/11 23:41:12 by acabiac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_grid
 {
 	char	**map;
+	int		*scoreGrid;
 	int		line;
 	int		column;
 }	t_grid;
@@ -70,6 +71,7 @@ int		errorArgVal(void);
 int		errorMalloc(void);
 
 //ia.c
+void	evalWholeGrid(t_grid const *grid, int const player);
 int	eval(t_grid const *grid, int const action, int const player);
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction);
 void	decrementPos(int *x, int *y, int const direction);
