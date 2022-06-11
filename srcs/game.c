@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 14:48:32 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 15:10:54 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ void	startGame(t_grid *grid) {
 			displayGrid(*grid);
 			turn = 1;
 		}
-	
+		if (endOfGame(*grid))
+			break;
 	}
+	displayEndOfGame(*grid);
+}
+
+int	mapFull(t_grid const grid) {
+	for(int i = 0; i < grid.column; i++)
+		if (grid.map[i][0] == '.')
+			return (0);
+	return (1);
+}
+
+int	endOfGame(t_grid const grid) {
+	if (mapFull(grid))
+		return (1);
+	// if (someoneWin(grid))
+	// 	return (1)
+	return (0);
 }

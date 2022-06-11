@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 14:24:24 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 15:11:07 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_grid
 //	game.c
 int		pickPlayer(void);
 void	startGame(t_grid *grid);
+int		mapFull(t_grid const grid);
+int		endOfGame(t_grid const grid);
 
 //	player.c
 void	playerAction(t_grid *grid, int const action);
@@ -44,7 +46,8 @@ void	freeGrid(t_grid *grid);
 //	display.c
 void	displayStart(void);
 void	displayGrid(t_grid const grid);
-void	displayTurn(int	turn);
+void	displayTurn(int	const turn);
+void	displayEndOfGame(t_grid const grid);
 
 //	error.c
 int		errorArgNbr(void);
