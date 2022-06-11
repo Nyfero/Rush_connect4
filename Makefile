@@ -28,7 +28,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRCS_PATH = srcs
 
 #    Files
-FILES = main.c init.c error.c display.c game.c player.c checkWin.c
+FILES = main.c init.c error.c display.c game.c player.c checkWin.c ia.c
 
 #    Compilation
 NAME = connect4
