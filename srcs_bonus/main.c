@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:36 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 20:51:17 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 21:39:46 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int main(int ac, char **av) {
 		mlx.mlx = mlx_init();
 		if (!mlx.mlx)
 			return (errorMlx());
-		mlx.win = mlx_new_window(mlx.mlx, column * 64, line * 64, "connect4_bonus");
+		mlx.win = mlx_new_window(mlx.mlx, column * 64, (line + 1) * 64, "connect4_bonus");
+		initImg(mlx);
 		// mlx_hook(d.win3d, 33, 1L << 5, end_cub3d, &d);
+		// startGame(grid);
 		mlx_loop(mlx.mlx);
 	}
 	else
