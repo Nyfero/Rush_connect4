@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 15:32:26 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 17:04:27 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@ int		pickPlayer(void);
 void	startGame(t_grid *grid);
 int		mapFull(t_grid const grid);
 int		endOfGame(t_grid const grid, int const action);
+int		someoneWin(t_grid const grid, int const action);
+
+//	checkWin.c
+int		checkIfWin(char const pion, t_grid const grid, int const x, int const y);
+int		checkWinLigne(char const pion, t_grid const grid, int const x, int const y);
+int		checkWinColumn(char const pion, t_grid const grid, int const x, int const y);
+int		checkWinD1(char const pion, t_grid const grid, int const x, int const y);
+int		checkWinD2(char const pion, t_grid const grid, int const x, int const y);
 
 //	player.c
 void	playerAction(t_grid *grid, int const action);
+void	botAction(t_grid *grid, int const action);
 int		askPlayer(t_grid const grid);
 int		isInt(char const *input);
 int		isInGrid(char const *input, t_grid const grid);
@@ -47,7 +56,7 @@ void	freeGrid(t_grid *grid);
 void	displayStart(void);
 void	displayGrid(t_grid const grid);
 void	displayTurn(int	const turn);
-void	displayEndOfGame(t_grid const grid);
+void	displayEndOfGame(t_grid const grid, int const action, int const turn);
 
 //	error.c
 int		errorArgNbr(void);

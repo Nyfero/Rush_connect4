@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 15:32:53 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 17:04:08 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	startGame(t_grid *grid) {
 	
 	int	turn;
 	int	action;
-	turn = pickPlayer();
+	// turn = pickPlayer();
+	turn = 1;
 	while (1)
 	{
 		displayTurn(turn);
@@ -48,13 +49,15 @@ void	startGame(t_grid *grid) {
 		else
 		{
 			//IA do something
+			action = askPlayer(*grid);
+			botAction(grid, action);
 			displayGrid(*grid);
 			turn = 1;
 		}
 		if (endOfGame(*grid, action))
 			break;
 	}
-	displayEndOfGame(*grid);
+	displayEndOfGame(*grid, action, turn);
 }
 
 int	mapFull(t_grid const grid) {
@@ -64,14 +67,26 @@ int	mapFull(t_grid const grid) {
 	return (1);
 }
 
-int	someoneWin(t_grid const grid, int const action) {
-	
-}
-
 int	endOfGame(t_grid const grid, int const action) {
 	if (mapFull(grid))
 		return (1);
+	(void)action;
 	if (someoneWin(grid, action))
-		return (1)
+		return (1);
+	return (0);
+}
+
+int	someoneWin(t_grid const grid, int const action) {
+	int		i = 0;
+	char	pion;
+
+	while (grid.map[action - 1][i] == '.')
+		i++;
+	if (grid.map[action - 1][i] == 'X')
+		pion = 'X';
+	else
+		pion = 'O';
+	if (checkIfWin(pion, grid, action - 1, i))
+		return (1);
 	return (0);
 }

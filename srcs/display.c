@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:24 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 15:10:46 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 16:57:55 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,14 @@ void	displayTurn(int	const turn) {
 		ft_putstr("\e[95mIt's IA turn !\e[39m\n");
 }
 
-void	displayEndOfGame(t_grid const grid) {
+void	displayEndOfGame(t_grid const grid, int const action, int const turn) {
 	if (mapFull(grid))
 		ft_putstr("\e[93mThe map is full !\nIt's a draw !\e[39m\n");
+	if (someoneWin(grid, action))
+	{
+		if (!turn)
+			ft_putstr("\e[92mYou Won !\e[39m\n");
+		else
+			ft_putstr("\e[91mYou Lose !\e[39m\n");
+	}
 }
