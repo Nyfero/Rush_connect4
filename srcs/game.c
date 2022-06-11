@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 17:04:08 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 17:26:24 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	mapFull(t_grid const grid) {
 int	endOfGame(t_grid const grid, int const action) {
 	if (mapFull(grid))
 		return (1);
-	(void)action;
 	if (someoneWin(grid, action))
 		return (1);
 	return (0);
@@ -79,13 +78,10 @@ int	endOfGame(t_grid const grid, int const action) {
 int	someoneWin(t_grid const grid, int const action) {
 	int		i = 0;
 	char	pion;
-
+	
 	while (grid.map[action - 1][i] == '.')
 		i++;
-	if (grid.map[action - 1][i] == 'X')
-		pion = 'X';
-	else
-		pion = 'O';
+	pion = grid.map[action - 1][i];
 	if (checkIfWin(pion, grid, action - 1, i))
 		return (1);
 	return (0);

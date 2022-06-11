@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:31:09 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 17:02:11 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 17:26:11 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	checkWinLigne(char const pion, t_grid const grid, int const x, int const y) 
 	
 	while (i > 0 && grid.map[i - 1][y] == pion)
 		i--;
-	while (grid.map[i][y] == pion)
+	while (i < grid.column && grid.map[i][y] == pion)
 	{
 		i++;
 		compt++;
@@ -40,10 +40,10 @@ int	checkWinLigne(char const pion, t_grid const grid, int const x, int const y) 
 int	checkWinColumn(char const pion, t_grid const grid, int const x, int const y) {
 	int	j = y;
 	int	compt = 0;
-	
+
 	while (j > 0 && grid.map[x][j - 1] == pion)
 		j--;
-	while (grid.map[x][j] == pion)
+	while (j < grid.line && grid.map[x][j] == pion)
 	{
 		j++;
 		compt++;
@@ -64,7 +64,7 @@ int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 		i--;
 		j++;
 	}
-	while (grid.map[i][j] == pion)
+	while (i < grid.column && j > 0 && grid.map[i][j] == pion)
 	{
 		i++;
 		j--;
@@ -86,7 +86,7 @@ int	checkWinD2(char const pion, t_grid const grid, int const x, int const y) {
 		i--;
 		j--;
 	}
-	while (grid.map[i][j] == pion)
+	while (i < grid.column && j < grid.line && grid.map[i][j] == pion)
 	{
 		i++;
 		j++;

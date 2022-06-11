@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:24 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 16:57:55 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 17:40:23 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	displayEndOfGame(t_grid const grid, int const action, int const turn) {
 	if (someoneWin(grid, action))
 	{
 		if (!turn)
-			ft_putstr("\e[92mYou Won !\e[39m\n");
+			ft_putstr("\e[92mThe player won!\e[39m\n");
 		else
-			ft_putstr("\e[91mYou Lose !\e[39m\n");
+			ft_putstr("\e[91mThe IA won !\e[39m\n");
 	}
 }
