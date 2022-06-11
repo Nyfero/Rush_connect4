@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 18:41:59 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 20:52:34 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CONNECT4_H
 
 # include "../libft/inc/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -26,6 +28,12 @@ typedef struct s_grid
 	int		line;
 	int		column;
 }	t_grid;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx;
 
 //	game.c
 int		pickPlayer(void);
@@ -62,5 +70,7 @@ void	displayEndOfGame(t_grid const grid, int const action, int const turn);
 int		errorArgNbr(void);
 int		errorArgVal(void);
 int		errorMalloc(void);
+/*	Bonus	*/
+int		errorMlx(void);
 
 #endif
