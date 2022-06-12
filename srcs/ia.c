@@ -34,7 +34,7 @@ void	decrementPos(int *x, int *y, int const direction) {
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction) {
 
 	char playerPiece;
-	t_aiVal	ret = {0, 0, 0};
+	t_aiVal	ret = {-1, -1, -1};
 	int	actionY;
 
 	if (action < 0 || action >= grid->column)
@@ -49,6 +49,7 @@ t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, i
 		playerPiece = PLAYERCHAR;
 	else
 		playerPiece = IACHAR;
+	ft_memset(&ret, 0, sizeof(t_aiVal));
 	grid->map[action][actionY] = playerPiece;
 	int tempY = actionY;
 	int	tempX = action;
@@ -115,10 +116,12 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	}
 	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
-	if ( ret.third == 4 )
+	if ( ret.third >= 4 )
 		return (INT_MAX);
-	else if (ret2.third == 4 )
+	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret.first < 0)
+		return (-1);
 	else if ( ret.first == 4 ) {
 		multi = 1;
 		if (ret.second== OPENBOTH)
@@ -148,10 +151,12 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	}
 	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
-	if ( ret.third == 4 )
+	if ( ret.third >= 4 )
 		return (INT_MAX);
-	else if (ret2.third == 4 )
+	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret.first < 0)
+		return (-1);
 	else if ( ret.first == 4 ) {
 		multi = 1;
 		if (ret.second== OPENBOTH)
@@ -181,10 +186,12 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	}
 	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
-	if ( ret.third == 4 )
+	if ( ret.third >= 4 )
 		return (INT_MAX);
-	else if (ret2.third == 4 )
+	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret.first < 0)
+		return (-1);
 	else if ( ret.first == 4 ) {
 		multi = 1;
 		if (ret.second== OPENBOTH)
@@ -214,10 +221,12 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	}
 	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
-	if ( ret.third == 4 )
+	if ( ret.third >= 4 )
 		return (INT_MAX);
-	else if (ret2.third == 4 )
+	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret.first < 0)
+		return (-1);
 	else if ( ret.first == 4 ) {
 		multi = 1;
 		if (ret.second== OPENBOTH)
@@ -232,12 +241,71 @@ int	eval(t_grid const *grid, int const action, int const player) {
 
 void	evalWholeGrid(t_grid const *grid, int const player) {
 
+	int const opponent = player? 0 : 1;
+	int	playerBest = -2;
+	int	playerBestAction;
+	int	opponentBest = -2;
+	int	opponentBestAction;
 	for (int i = 0; i < grid->column; i++) {
 		grid->scoreGrid[i] = eval(grid, i, player);
+		if (grid->scoreGrid[i] > playerBest){
+			playerBest = grid->scoreGrid[i];
+			playerBestAction = i;
+		}
 	}
 	printf("scoreGrid: \n");
 	for (int i = 0; i < grid->column; i++) {
 		printf("[%d]=%d  ",i, grid->scoreGrid[i]);
 	}
 	printf("\n");
+	printf("scoreGrid Opponent: \n");
+	for (int i = 0; i < grid->column; i++){
+		int tmp = eval(grid, i, opponent);
+		if (tmp > opponentBest) {
+			opponentBest = tmp;
+			opponentBestAction = i;
+		}
+		printf("[%d]=%d  ",i, tmp);
+	}
+	printf("\n");
+	printf("YOU SHOULD PLAY ");
+	if (playerBest == INT_MAX)
+		printf("%d\n", playerBestAction + 1);
+	else if (opponentBest == INT_MAX)
+		printf("%d\n", opponentBestAction + 1);
+	else if (playerBest > opponentBest)
+		printf("%d\n", playerBestAction + 1);
+	else
+		printf("%d\n", opponentBestAction + 1);
+}
+
+int	getBestAction(t_grid const *grid, int const player) {
+
+	int const opponent = player? 0 : 1;
+	int	playerBest = -2;
+	int	playerBestAction;
+	int	opponentBest = -2;
+	int	opponentBestAction;
+	for (int i = 0; i < grid->column; i++) {
+		grid->scoreGrid[i] = eval(grid, i, player);
+		if (grid->scoreGrid[i] > playerBest){
+			playerBest = grid->scoreGrid[i];
+			playerBestAction = i;
+		}
+	}
+	for (int i = 0; i < grid->column; i++){
+		int tmp = eval(grid, i, opponent);
+		if (tmp > opponentBest) {
+			opponentBest = tmp;
+			opponentBestAction = i;
+		}
+	}
+	if (playerBest == INT_MAX)
+		return (playerBestAction + 1);
+	else if (opponentBest == INT_MAX)
+		return (opponentBestAction + 1);
+	else if (playerBest > opponentBest)
+		return (playerBestAction + 1);
+	else
+		return (opponentBestAction + 1);
 }
