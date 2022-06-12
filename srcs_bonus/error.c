@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:30 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:56:58 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 17:47:10 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ int	errorArgVal(void) {
 
 int	errorMalloc(void) {
 	ft_putstr_fd("Malloc failed :(\n", 2);
+	return (1);
+}
+
+int	errorMlx(void) {
+	ft_putstr_fd("Mlx failed :(\n", 2);
 	return (1);
 }
