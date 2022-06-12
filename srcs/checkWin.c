@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:31:09 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:46:01 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:35:59 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 		i--;
 		j++;
 	}
-	while (i < grid.column && j > 0 && grid.map[i][j] == pion)
+	while (i < grid.column && j >= 0 && grid.map[i][j] == pion)
 	{
 		i++;
 		j--;

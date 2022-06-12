@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:31:09 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 18:49:06 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:31:29 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	checkWinColumn(char const pion, t_grid const grid, int const x, int const y)
 	return (0);
 }
 
+#include <stdio.h>
+
 //Vérifie si on a une victoire sur une diagonale montante (/>)
 int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 	int	i = x;
@@ -65,11 +67,12 @@ int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 		i--;
 		j++;
 	}
-	while (i < grid.column && j > 0 && grid.map[i][j] == pion)
+	while (i < grid.column && j >= 0 && grid.map[i][j] == pion)
 	{
 		i++;
 		j--;
 		compt++;
+		printf("compt = %d\n", compt);
 	}
 	if (compt >= 4)
 		return (1);

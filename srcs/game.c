@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 18:56:23 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:34:40 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	startGame(t_grid *grid) {
 		else
 		{
 			//IA do something
-			action = getBestAction(grid, 0);
+			// action = getBestAction(grid, 0);
+			action = askPlayer(*grid);
 			botAction(grid, action);
 			displayGrid(*grid);
 			turn = 1;
