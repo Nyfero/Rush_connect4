@@ -6,13 +6,14 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:24:24 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 18:09:28 by acabiac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONNECT4_H
 # define CONNECT4_H
 
+# include <limits.h>
 # include "../libft/inc/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -21,6 +22,18 @@
 # include <time.h>
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+
+#define HORIZONTAL 0
+#define VERTICAL 1
+#define DIAG_UP 2
+#define DIAG_DOWN 3
+
+#define OPENLEFT 1
+#define OPENRIGHT 2
+#define OPENBOTH 3
+
+#define PLAYERCHAR 'X'
+#define IACHAR 'O'
 
 typedef struct s_grid
 {
@@ -108,7 +121,6 @@ int		errorMlx(void);
 
 //ia.c
 int	getBestAction(t_grid const *grid, int const player);
-void	evalWholeGrid(t_grid const *grid, int const player);
 int		eval(t_grid const *grid, int const action, int const player);
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction);
 void	decrementPos(int *x, int *y, int const direction);

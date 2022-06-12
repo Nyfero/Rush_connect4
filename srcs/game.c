@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:47:38 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 18:23:27 by acabiac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	startGame(t_grid *grid) {
 	
 	int	turn;
 	int	action;
+
 	turn = pickPlayer();
 	while (1)
 	{
@@ -51,6 +52,7 @@ void	startGame(t_grid *grid) {
 		{
 			//IA do something
 			action = getBestAction(grid, 0);
+			printf("IA play %d\n", action);
 			botAction(grid, action);
 			displayGrid(*grid);
 			turn = 1;

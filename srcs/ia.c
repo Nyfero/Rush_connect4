@@ -1,15 +1,4 @@
 #include "connect4.h"
-#define HORIZONTAL 0
-#define VERTICAL 1
-#define DIAG_UP 2
-#define DIAG_DOWN 3
-
-#define OPENLEFT 1
-#define OPENRIGHT 2
-#define OPENBOTH 3
-
-#define PLAYERCHAR 'X'
-#define IACHAR 'O'
 
 void	incrementPos(int *x, int *y, int const direction) {
 
@@ -89,7 +78,6 @@ t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, i
 	grid->map[action][actionY] = '.';
 	return ret;
 }
-#include <limits.h>
 
 int	eval(t_grid const *grid, int const action, int const player) {
 
@@ -98,28 +86,15 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	int	const opponent = player ? 0 : 1;
 	t_aiVal ret = possibleAlign(grid, action, player, HORIZONTAL);
 	t_aiVal ret2 = possibleAlign(grid, action, opponent, HORIZONTAL);
-/*	printf("HORIZONTAL ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
 	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret2.third == 3 && ret2.second == OPENBOTH)
+		return (INT_MAX - 2);
+	else if (ret.third == 3 && ret.second == OPENBOTH)
+		return (INT_MAX - 3);
 	else if (ret.first < 0)
 		return (-1);
 	else if ( ret.first == 4 ) {
@@ -128,33 +103,20 @@ int	eval(t_grid const *grid, int const action, int const player) {
 			multi = 3;
 		else if (ret.second)
 			multi = 2;
-		score += (ret.third * 5 * multi);
+		score += ((ret.third * 5) + multi);
 	}
 
 	ret = possibleAlign(grid, action, player, VERTICAL);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("VERTICAL ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
 	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret2.third == 3 && ret2.second == OPENBOTH)
+		return (INT_MAX - 2);
+	else if (ret.third == 3 && ret.second == OPENBOTH)
+		return (INT_MAX - 3);
 	else if (ret.first < 0)
 		return (-1);
 	else if ( ret.first == 4 ) {
@@ -163,33 +125,20 @@ int	eval(t_grid const *grid, int const action, int const player) {
 			multi = 3;
 		else if (ret.second)
 			multi = 2;
-		score += (ret.third * 5 * multi);
+		score += ((ret.third * 5) + multi);
 	}
 
 	ret = possibleAlign(grid, action, player, DIAG_UP);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("DIAGONAL UP ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
 	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret2.third == 3 && ret2.second == OPENBOTH)
+		return (INT_MAX - 2);
+	else if (ret.third == 3 && ret.second == OPENBOTH)
+		return (INT_MAX - 3);
 	else if (ret.first < 0)
 		return (-1);
 	else if ( ret.first == 4 ) {
@@ -198,33 +147,20 @@ int	eval(t_grid const *grid, int const action, int const player) {
 			multi = 3;
 		else if (ret.second)
 			multi = 2;
-		score += (ret.third * 5 * multi);
+		score += ((ret.third * 5) + multi);
 	}
 
 	ret = possibleAlign(grid, action, player, DIAG_DOWN);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("DIAGONAL DOWN ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
 	else if (ret2.third >= 4 )
 		return (INT_MAX - 1);
+	else if (ret2.third == 3 && ret2.second == OPENBOTH)
+		return (INT_MAX - 2);
+	else if (ret.third == 3 && ret.second == OPENBOTH)
+		return (INT_MAX - 3);
 	else if (ret.first < 0)
 		return (-1);
 	else if ( ret.first == 4 ) {
@@ -233,50 +169,10 @@ int	eval(t_grid const *grid, int const action, int const player) {
 			multi = 3;
 		else if (ret.second)
 			multi = 2;
-		score += (ret.third * 5 * multi);
+		score += ((ret.third * 5) + multi);
 	}
 
 	return score;
-}
-
-void	evalWholeGrid(t_grid const *grid, int const player) {
-
-	int const opponent = player? 0 : 1;
-	int	playerBest = -2;
-	int	playerBestAction;
-	int	opponentBest = -2;
-	int	opponentBestAction;
-	for (int i = 0; i < grid->column; i++) {
-		grid->scoreGrid[i] = eval(grid, i, player);
-		if (grid->scoreGrid[i] > playerBest){
-			playerBest = grid->scoreGrid[i];
-			playerBestAction = i;
-		}
-	}
-	printf("scoreGrid: \n");
-	for (int i = 0; i < grid->column; i++) {
-		printf("[%d]=%d  ",i, grid->scoreGrid[i]);
-	}
-	printf("\n");
-	printf("scoreGrid Opponent: \n");
-	for (int i = 0; i < grid->column; i++){
-		int tmp = eval(grid, i, opponent);
-		if (tmp > opponentBest) {
-			opponentBest = tmp;
-			opponentBestAction = i;
-		}
-		printf("[%d]=%d  ",i, tmp);
-	}
-	printf("\n");
-	printf("YOU SHOULD PLAY ");
-	if (playerBest == INT_MAX)
-		printf("%d\n", playerBestAction + 1);
-	else if (opponentBest == INT_MAX)
-		printf("%d\n", opponentBestAction + 1);
-	else if (playerBest > opponentBest)
-		printf("%d\n", playerBestAction + 1);
-	else
-		printf("%d\n", opponentBestAction + 1);
 }
 
 int	getBestAction(t_grid const *grid, int const player) {
@@ -286,6 +182,7 @@ int	getBestAction(t_grid const *grid, int const player) {
 	int	playerBestAction;
 	int	opponentBest = -2;
 	int	opponentBestAction;
+	char playerPiece = player ? PLAYERCHAR : IACHAR;
 	for (int i = 0; i < grid->column; i++) {
 		grid->scoreGrid[i] = eval(grid, i, player);
 		if (grid->scoreGrid[i] > playerBest){
@@ -304,8 +201,29 @@ int	getBestAction(t_grid const *grid, int const player) {
 		return (playerBestAction + 1);
 	else if (opponentBest == INT_MAX)
 		return (opponentBestAction + 1);
-	else if (playerBest > opponentBest)
-		return (playerBestAction + 1);
+	else if (playerBest > opponentBest) {
+
+		int actionY;
+		int	opponentBest2 = -2;
+		int	opponentBestAction2;
+		for (actionY = grid->line - 1 ; actionY >= 0 ; actionY--) {
+			if (grid->map[playerBestAction][actionY] == '.')
+				break;
+		}
+		grid->map[playerBestAction][actionY] =  playerPiece;
+		for (int i = 0; i < grid->column; i++){
+			int tmp = eval(grid, i, opponent);
+			if (tmp > opponentBest2) {
+				opponentBest2 = tmp;
+				opponentBestAction2 = i;
+			}
+		}
+		grid->map[playerBestAction][actionY] =  '.';
+		if (playerBest > opponentBest2)
+			return (playerBestAction + 1);
+		else
+			return (opponentBestAction + 1);
+	}
 	else
 		return (opponentBestAction + 1);
 }
