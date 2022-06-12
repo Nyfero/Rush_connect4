@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 19:39:54 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 21:00:36 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	startGame(t_grid *grid) {
 //Vérifie si la partie doit se termier
 int	endOfGame(t_grid const grid, int const action) {
 	if (mapFull(grid))
-	return (1);
+		return (1);
 	if (someoneWin(grid, action))
-	return (1);
+		return (1);
 	return (0);
 }
 
