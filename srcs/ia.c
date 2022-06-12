@@ -1,0 +1,243 @@
+#include "connect4.h"
+#define HORIZONTAL 0
+#define VERTICAL 1
+#define DIAG_UP 2
+#define DIAG_DOWN 3
+
+#define OPENLEFT 1
+#define OPENRIGHT 2
+#define OPENBOTH 3
+
+#define PLAYERCHAR 'X'
+#define IACHAR 'O'
+
+void	incrementPos(int *x, int *y, int const direction) {
+
+	if (direction != VERTICAL)
+		(*x)++;
+	if (direction == DIAG_DOWN || direction == VERTICAL)
+		(*y)++;
+	else if (direction == DIAG_UP)
+		(*y)--;
+}
+
+void	decrementPos(int *x, int *y, int const direction) {
+
+	if (direction != VERTICAL)
+		(*x)--;
+	if (direction == DIAG_DOWN || direction == VERTICAL)
+		(*y)--;
+	else if (direction == DIAG_UP)
+		(*y)++;
+}
+
+t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction) {
+
+	char playerPiece;
+	t_aiVal	ret = {0, 0, 0};
+	int	actionY;
+
+	if (action < 0 || action >= grid->column)
+		return ret;
+	for (actionY = grid->line - 1 ; actionY >= 0 ; actionY--) {
+		if (grid->map[action][actionY] == '.')
+			break;
+	}
+	if (actionY < 0)
+		return ret;
+	if (player)
+		playerPiece = PLAYERCHAR;
+	else
+		playerPiece = IACHAR;
+	grid->map[action][actionY] = playerPiece;
+	int tempY = actionY;
+	int	tempX = action;
+	int	count = 1;
+	int	i = 0;
+	while ( i < 4 && tempX >= 0 && tempY >= 0 && tempY < grid->line && (grid->map[tempX][tempY] == playerPiece || grid->map[tempX][tempY] == '.') ){
+		if (ret.second == 0 && grid->map[tempX][tempY] == '.') {
+			ret.second = OPENLEFT;
+			count = 0;
+		}
+		if (count)
+			ret.third++;
+		decrementPos(&tempX, &tempY, direction);
+		i++;
+	}
+	incrementPos(&tempX, &tempY, direction);
+	while ( tempX != action || tempY != actionY ) {
+		incrementPos(&tempX, &tempY, direction);
+		ret.first++;
+	}
+	ret.first++;
+	incrementPos(&tempX, &tempY, direction);
+	count = 1;
+	i = 0;
+	while ( i < 4 && tempX < grid->column && tempY >= 0 && tempY < grid->line && (grid->map[tempX][tempY] == playerPiece || grid->map[tempX][tempY] == '.') ){
+		if (ret.second < OPENRIGHT && grid->map[tempX][tempY] == '.') {
+			ret.second += OPENRIGHT;
+			count = 0;
+		}
+		if (count)
+			ret.third++;
+		incrementPos(&tempX, &tempY, direction);
+		ret.first++;
+	}
+	if (ret.first > 4)
+		ret.first = 4;
+	grid->map[action][actionY] = '.';
+	return ret;
+}
+#include <limits.h>
+
+int	eval(t_grid const *grid, int const action, int const player) {
+
+	int	score = 0;
+	int	multi;
+	int	const opponent = player ? 0 : 1;
+	t_aiVal ret = possibleAlign(grid, action, player, HORIZONTAL);
+	t_aiVal ret2 = possibleAlign(grid, action, opponent, HORIZONTAL);
+/*	printf("HORIZONTAL ALIGN : open = ");
+	switch (ret.second) {
+
+		case OPENLEFT:
+			printf("LEFT");
+			break;
+		case OPENRIGHT:
+			printf("RIGHT");
+			break;
+		case OPENBOTH:
+			printf("BOTH");
+			break;
+		default:
+			printf("NONE");
+			break;
+	}
+	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
+
+	if ( ret.third == 4 )
+		return (INT_MAX);
+	else if (ret2.third == 4 )
+		return (INT_MAX - 1);
+	else if ( ret.first == 4 ) {
+		multi = 1;
+		if (ret.second== OPENBOTH)
+			multi = 3;
+		else if (ret.second)
+			multi = 2;
+		score += (ret.third * 5 * multi);
+	}
+
+	ret = possibleAlign(grid, action, player, VERTICAL);
+	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
+/*	printf("VERTICAL ALIGN : open = ");
+	switch (ret.second) {
+
+		case OPENLEFT:
+			printf("LEFT");
+			break;
+		case OPENRIGHT:
+			printf("RIGHT");
+			break;
+		case OPENBOTH:
+			printf("BOTH");
+			break;
+		default:
+			printf("NONE");
+			break;
+	}
+	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
+
+	if ( ret.third == 4 )
+		return (INT_MAX);
+	else if (ret2.third == 4 )
+		return (INT_MAX - 1);
+	else if ( ret.first == 4 ) {
+		multi = 1;
+		if (ret.second== OPENBOTH)
+			multi = 3;
+		else if (ret.second)
+			multi = 2;
+		score += (ret.third * 5 * multi);
+	}
+
+	ret = possibleAlign(grid, action, player, DIAG_UP);
+	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
+/*	printf("DIAGONAL UP ALIGN : open = ");
+	switch (ret.second) {
+
+		case OPENLEFT:
+			printf("LEFT");
+			break;
+		case OPENRIGHT:
+			printf("RIGHT");
+			break;
+		case OPENBOTH:
+			printf("BOTH");
+			break;
+		default:
+			printf("NONE");
+			break;
+	}
+	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
+
+	if ( ret.third == 4 )
+		return (INT_MAX);
+	else if (ret2.third == 4 )
+		return (INT_MAX - 1);
+	else if ( ret.first == 4 ) {
+		multi = 1;
+		if (ret.second== OPENBOTH)
+			multi = 3;
+		else if (ret.second)
+			multi = 2;
+		score += (ret.third * 5 * multi);
+	}
+
+	ret = possibleAlign(grid, action, player, DIAG_DOWN);
+	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
+/*	printf("DIAGONAL DOWN ALIGN : open = ");
+	switch (ret.second) {
+
+		case OPENLEFT:
+			printf("LEFT");
+			break;
+		case OPENRIGHT:
+			printf("RIGHT");
+			break;
+		case OPENBOTH:
+			printf("BOTH");
+			break;
+		default:
+			printf("NONE");
+			break;
+	}
+	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
+
+	if ( ret.third == 4 )
+		return (INT_MAX);
+	else if (ret2.third == 4 )
+		return (INT_MAX - 1);
+	else if ( ret.first == 4 ) {
+		multi = 1;
+		if (ret.second== OPENBOTH)
+			multi = 3;
+		else if (ret.second)
+			multi = 2;
+		score += (ret.third * 5 * multi);
+	}
+
+	return score;
+}
+
+void	evalWholeGrid(t_grid const *grid, int const player) {
+
+	for (int i = 0; i < grid->column; i++) {
+		grid->scoreGrid[i] = eval(grid, i, player);
+	}
+	printf("scoreGrid: \n");
+	for (int i = 0; i < grid->column; i++) {
+		printf("[%d]=%d  ",i, grid->scoreGrid[i]);
+	}
+	printf("\n");
+}

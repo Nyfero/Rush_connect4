@@ -34,7 +34,7 @@ SRCS_PATH = srcs
 SRCS_PATH_BONUS = srcs_bonus
 
 #    Files
-FILES = main.c init.c error.c display.c game.c player.c checkWin.c
+FILES = main.c init.c error.c display.c game.c player.c checkWin.c ia.c
 
 FILES_BONUS = main.c init.c error.c display.c game.c player.c checkWin.c
 

@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 17:26:24 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/11 23:46:26 by acabiac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	startGame(t_grid *grid) {
 		displayTurn(turn);
 		if (turn)
 		{
+			evalWholeGrid(grid, 1);
 			action = askPlayer(*grid);
 			playerAction(grid, action);
 			displayGrid(*grid);
@@ -49,6 +50,7 @@ void	startGame(t_grid *grid) {
 		else
 		{
 			//IA do something
+			evalWholeGrid(grid, 0);
 			action = askPlayer(*grid);
 			botAction(grid, action);
 			displayGrid(*grid);
