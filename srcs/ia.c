@@ -86,23 +86,6 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	int	const opponent = player ? 0 : 1;
 	t_aiVal ret = possibleAlign(grid, action, player, HORIZONTAL);
 	t_aiVal ret2 = possibleAlign(grid, action, opponent, HORIZONTAL);
-/*	printf("HORIZONTAL ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
@@ -125,23 +108,6 @@ int	eval(t_grid const *grid, int const action, int const player) {
 
 	ret = possibleAlign(grid, action, player, VERTICAL);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("VERTICAL ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
@@ -164,23 +130,6 @@ int	eval(t_grid const *grid, int const action, int const player) {
 
 	ret = possibleAlign(grid, action, player, DIAG_UP);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("DIAGONAL UP ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
@@ -203,23 +152,6 @@ int	eval(t_grid const *grid, int const action, int const player) {
 
 	ret = possibleAlign(grid, action, player, DIAG_DOWN);
 	ret2 = possibleAlign(grid, action, opponent, VERTICAL);
-/*	printf("DIAGONAL DOWN ALIGN : open = ");
-	switch (ret.second) {
-
-		case OPENLEFT:
-			printf("LEFT");
-			break;
-		case OPENRIGHT:
-			printf("RIGHT");
-			break;
-		case OPENBOTH:
-			printf("BOTH");
-			break;
-		default:
-			printf("NONE");
-			break;
-	}
-	printf(", max alignement : %d, current alignment : %d\n", ret.first, ret.third);*/
 
 	if ( ret.third >= 4 )
 		return (INT_MAX);
@@ -251,7 +183,6 @@ int	getBestAction(t_grid const *grid, int const player) {
 	int	opponentBest = -2;
 	int	opponentBestAction;
 	char playerPiece = player ? PLAYERCHAR : IACHAR;
-//	char opponentPiece = player ? IACHAR : PLAYERCHAR;
 	for (int i = 0; i < grid->column; i++) {
 		grid->scoreGrid[i] = eval(grid, i, player);
 		if (grid->scoreGrid[i] > playerBest){
