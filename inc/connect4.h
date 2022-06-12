@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 20:01:45 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 20:40:13 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	displayInterface(t_mlx *data);
 void	displayHelp(void);
 
 //	error.c
+long long	ft_strtoll(const char *str, char **end);
 int		errorArgNbr(void);
 int		errorArgVal(void);
 int		errorMalloc(void);
