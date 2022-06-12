@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:22:48 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:57:24 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:45:12 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,12 @@ void	initGrid(t_grid **grid, int line, int column) {
 	(*grid)->map[i] = 0;
 	(*grid)->line = line;
 	(*grid)->column = column;
-	(*grid)->scoreGrid = (int *)malloc(sizeof(int ) * column );
-	if (!(*grid)->scoreGrid){
-		freeGrid(*grid);
-		*grid = NULL;
-		return ;
-	}
-	ft_memset( (*grid)->scoreGrid, 0, column );
 }
 
 //Libère la mémoire de ma grille
 void	freeGrid(t_grid *grid) {
 	if (grid->map)
 		ft_free_ls(grid->map);
-	if (grid->scoreGrid)
-		free(grid->scoreGrid);
 	if (grid)
 		free(grid);
 }

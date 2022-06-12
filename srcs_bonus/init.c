@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:22:48 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:48:02 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:45:29 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ void	initGrid(t_grid **grid, int line, int column) {
 	(*grid)->map[i] = 0;
 	(*grid)->line = line;
 	(*grid)->column = column;
-	(*grid)->scoreGrid = (int *)malloc(sizeof(int ) * column );
-	if (!(*grid)->scoreGrid){
-		freeGrid(*grid);
-		*grid = NULL;
-		return ;
-	}
-	ft_memset( (*grid)->scoreGrid, 0, column );
 }
 
 //Initialise la mlx et la structure qui la contient
@@ -85,8 +78,6 @@ int	initImg(t_mlx *data) {
 void	freeGrid(t_grid *grid) {
 	if (grid->map)
 		ft_free_ls(grid->map);
-	if (grid->scoreGrid)
-		free(grid->scoreGrid);
 	if (grid)
 		free(grid);
 }

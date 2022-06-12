@@ -168,9 +168,9 @@ int	getBestAction(t_grid const *grid, int const player) {
 	int	opponentBestAction;
 	char playerPiece = player ? PLAYERCHAR : IACHAR;
 	for (int i = 0; i < grid->column; i++) {
-		grid->scoreGrid[i] = eval(grid, i, player);
-		if (grid->scoreGrid[i] > playerBest){
-			playerBest = grid->scoreGrid[i];
+		int tmp = eval(grid, i, player);
+		if (tmp > playerBest){
+			playerBest = tmp;
 			playerBestAction = i;
 		}
 	}

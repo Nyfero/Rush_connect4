@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 18:51:32 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 19:45:37 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 typedef struct s_grid
 {
 	char	**map;
-	int		*scoreGrid;
 	int		line;
 	int		column;
 }	t_grid;
