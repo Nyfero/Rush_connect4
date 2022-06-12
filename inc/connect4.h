@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 13:59:50 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 14:50:19 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_mlx
 	
 	t_grid	*grid;
 	int		cursor;
+	int		turn;
 }	t_mlx;
 
 
@@ -117,6 +118,9 @@ void	freeMlx(t_mlx *data);
 int		keyboard(int keycode, t_mlx *data);
 void	moveLeft(t_mlx *data);
 void	moveRight(t_mlx *data);
+int		closeGame(t_mlx *data);
+void	playerTurn(t_mlx *data);
+void	IATurn(t_mlx *data);
 
 //	game.c
 void	startGameBonus(t_mlx *data);

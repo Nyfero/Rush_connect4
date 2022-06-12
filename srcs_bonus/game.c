@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 12:05:04 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 14:30:51 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	someoneWin(t_grid const grid, int const action) {
 	int		i = 0;
 	char	pion;
 	
-	while (grid.map[action - 1][i] == '.')
+	while (i < grid.line && grid.map[action - 1][i] == '.')
 		i++;
 	pion = grid.map[action - 1][i];
 	if (checkIfWin(pion, grid, action - 1, i))

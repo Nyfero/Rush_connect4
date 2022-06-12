@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 21:39:59 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 14:07:34 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:20:23 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,18 @@ void	startGameBonus(t_mlx *data) {
 	
 	displayInterface(data);
 	
-	int	turn;
-	// turn = pickPlayer();
-	turn = 1;
-	displayTurn(turn);
+	data->turn = pickPlayer();
+	displayTurn(data->turn);
+	if (!data->turn)
+		IATurn(data);
 	//mlx action player
-	// displayInterface(data);
 	mlx_hook(data->win, 02, (1L << 0), keyboard, data);
 	mlx_loop(data->mlx);
 }
 
 int	keyboard(int keycode, t_mlx *data) {
 	if (keycode == 65307)
-	{
-		freeMlx(data);
-		exit(0);
-	}
+		closeGame(data);
 	else if (keycode == 65361)
 		moveLeft(data);
 	else if (keycode == 65363)
@@ -47,17 +43,36 @@ int	keyboard(int keycode, t_mlx *data) {
 			ft_putstr("\e[91mThe column is full !\e[39m\n");
 			return (0);
 		}
-		playerAction(data->grid, data->cursor + 1);
-		displayGrid(*data->grid);
-		if (endOfGame(*data->grid, data->cursor))
-		{	
-			displayEndOfGame(*data->grid, data->cursor + 1, 0);
-			freeMlx(data);
-			exit(0);
-		}
+		playerTurn(data);
+		IATurn(data);
 	}
 	displayInterface(data);
 	return (0);
+}
+
+void	playerTurn(t_mlx *data) {
+	
+	playerAction(data->grid, data->cursor + 1);
+	displayGrid(*data->grid);
+	displayInterface(data);
+	if (endOfGame(*data->grid, data->cursor + 1))
+	{
+		displayEndOfGame(*data->grid, data->cursor + 1, 0);
+		closeGame(data);
+	}
+	displayTurn(0);
+}
+
+void	IATurn(t_mlx *data) {
+	
+	displayGrid(*data->grid);
+	displayInterface(data);
+	// if (endOfGame(*data->grid, data->cursor + 1))
+	// {
+	// 	displayEndOfGame(*data->grid, data->cursor + 1, 1);
+	// 	closeGame(data);
+	// }
+	displayTurn(1);
 }
 
 void	moveLeft(t_mlx *data) {
@@ -68,4 +83,11 @@ void	moveLeft(t_mlx *data) {
 void	moveRight(t_mlx *data) {
 	if (data->cursor < data->grid->column - 1)
 		data->cursor += 1;
+}
+
+int	closeGame(t_mlx *data) {
+	mlx_loop_end(data->mlx);
+	// freeMlx(data);
+	// exit(0);
+	return (0);
 }
