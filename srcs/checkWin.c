@@ -6,12 +6,13 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:31:09 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 17:26:11 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 17:46:01 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/connect4.h"
 
+//Vérifie si 4 pions sont alignés peut importe le sens
 int	checkIfWin(char const pion, t_grid const grid, int const x, int const y) {
 	if (checkWinLigne(pion, grid, x, y) || checkWinColumn(pion, grid, x, y)
 		|| checkWinD1(pion, grid, x, y) || checkWinD2(pion, grid, x, y))
@@ -53,7 +54,7 @@ int	checkWinColumn(char const pion, t_grid const grid, int const x, int const y)
 	return (0);
 }
 
-//Vérifie si on a une victoire sur une diagonale montante (y++)
+//Vérifie si on a une victoire sur une diagonale montante (/>)
 int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 	int	i = x;
 	int	j = y;
@@ -75,7 +76,7 @@ int	checkWinD1(char const pion, t_grid const grid, int const x, int const y) {
 	return (0);
 }
 
-//Vérifie si on a une victoire sur une diagonale descendante (y--)
+//Vérifie si on a une victoire sur une diagonale descendante (\>)
 int	checkWinD2(char const pion, t_grid const grid, int const x, int const y) {
 	int	i = x;
 	int	j = y;

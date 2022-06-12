@@ -6,15 +6,15 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:22:48 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 10:55:00 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 17:57:24 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/connect4.h"
 
+//Initialise la grille de jeu
 void	initGrid(t_grid **grid, int line, int column) {
-	int		i;
-	int		j;
+	int		i, j;
 	
 	(*grid) = (t_grid *)malloc(sizeof(t_grid) * 1);
 	if (!(*grid))
@@ -50,6 +50,7 @@ void	initGrid(t_grid **grid, int line, int column) {
 	ft_memset( (*grid)->scoreGrid, 0, column );
 }
 
+//Libère la mémoire de ma grille
 void	freeGrid(t_grid *grid) {
 	if (grid->map)
 		ft_free_ls(grid->map);

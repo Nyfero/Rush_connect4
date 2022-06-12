@@ -36,7 +36,7 @@ SRCS_PATH_BONUS = srcs_bonus
 #    Files
 FILES = main.c init.c error.c display.c game.c player.c checkWin.c ia.c
 
-FILES_BONUS = main.c init.c error.c display.c game.c player.c checkWin.c ia.c mlx.c
+FILES_BONUS = main_bonus.c init.c error.c display.c game.c player.c checkWin.c ia.c mlx.c
 
 #    Compilation
 NAME = connect4
