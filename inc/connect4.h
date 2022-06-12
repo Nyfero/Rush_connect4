@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 10:13:55 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 13:59:50 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,45 @@ void	incrementPos(int *x, int *y, int const direction);
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 
+typedef struct s_imge
+{
+	void	*img;
+	int		height;
+	int		width;
+}	t_imge;
+
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	
-	t_img	board;
-	t_img	red;
-	t_img	yellow;
+	t_imge	board;
+	t_imge	red;
+	t_imge	yellow;
+	
+	t_grid	*grid;
+	int		cursor;
 }	t_mlx;
+
 
 //	error.c
 int		errorMlx(void);
+
+//	init.c
+int		initMlx(t_mlx **data, int const column, int const line, t_grid *grid);
+int		initImg(t_mlx *data);
+void	freeMlx(t_mlx *data);
+
+//	mlx.c
+int		keyboard(int keycode, t_mlx *data);
+void	moveLeft(t_mlx *data);
+void	moveRight(t_mlx *data);
+
+//	game.c
+void	startGameBonus(t_mlx *data);
+
+//	display.c
+void	displayInterface(t_mlx *data);
+void	displayHelp(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:22:48 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 23:35:37 by acabiac          ###   ########.fr       */
+/*   Updated: 2022/06/12 10:55:00 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	initGrid(t_grid **grid, int line, int column) {
 }
 
 void	freeGrid(t_grid *grid) {
-	ft_free_ls(grid->map);
-	free(grid->scoreGrid);
-	free(grid);
+	if (grid->map)
+		ft_free_ls(grid->map);
+	if (grid->scoreGrid)
+		free(grid->scoreGrid);
+	if (grid)
+		free(grid);
 }

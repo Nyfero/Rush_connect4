@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:36 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 21:39:46 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 13:05:42 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int ac, char **av) {
 	int		line, column, gi;
 	t_grid	*grid;
-	t_mlx	mlx;
+	t_mlx	*data;
 
 	if (ac != 4)
 		return (errorArgNbr());
@@ -28,19 +28,21 @@ int main(int ac, char **av) {
 	initGrid(&grid, line, column);
 	if (!grid)
 		return (errorMalloc());
+	data = NULL;
 	if (gi == 1)
 	{
-		mlx.mlx = mlx_init();
-		if (!mlx.mlx)
+		if (initMlx(&data, column, line, grid))
+		{
+			freeMlx(data);
 			return (errorMlx());
-		mlx.win = mlx_new_window(mlx.mlx, column * 64, (line + 1) * 64, "connect4_bonus");
-		initImg(mlx);
-		// mlx_hook(d.win3d, 33, 1L << 5, end_cub3d, &d);
-		// startGame(grid);
-		mlx_loop(mlx.mlx);
+		}
+		startGameBonus(data);		
+		freeMlx(data);
 	}
 	else
+	{
 		startGame(grid);
-	freeGrid(grid);
+		freeGrid(grid);
+	}
 	return (0);
 }
