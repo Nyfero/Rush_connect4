@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:36 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 16:48:31 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 18:49:10 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av) {
 	line = ft_atoi(av[1]);
 	column = ft_atoi(av[2]);
 	gi = ft_atoi(av[3]);
-	if (line < 6 || column < 7)
+	if (line < 6 || column < 7 || line > 100 || column > 100)
 		return (errorArgVal());
 	grid = NULL;
 	initGrid(&grid, line, column);
