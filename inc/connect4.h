@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 14:50:19 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:03:30 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int		errorArgNbr(void);
 int		errorArgVal(void);
 int		errorMalloc(void);
 
-//	ia.c
+//ia.c
+int	getBestAction(t_grid const *grid, int const player);
 void	evalWholeGrid(t_grid const *grid, int const player);
 int		eval(t_grid const *grid, int const action, int const player);
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction);
