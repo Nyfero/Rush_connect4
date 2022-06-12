@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 20:49:23 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 22:42:06 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int		evalDir(t_grid const *grid, int const action, int const player, int const d
 int		max(int x, int y);
 int		getBestAction(t_grid const *grid, int const player);
 int		eval(t_grid const *grid, int const action, int const player);
+int		getNonMortalMove(t_grid const *grid, int const player, int const opponentBestAction);
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction);
 void	decrementPos(int *x, int *y, int const direction);
 void	incrementPos(int *x, int *y, int const direction);
