@@ -142,6 +142,30 @@ int	eval(t_grid const *grid, int const action, int const player) {
 	return (score);
 }
 
+/*
+** Fix de derniere minute qui choisit le deuxieme meilleur coup dans le cas ou :
+** le meilleur coup est moins bon que le meilleur coup du joueur mais
+** qu'on ne veut pas bloquer le joueur car c'est le meme coup
+*/
+int	getNonMortalMove(t_grid const *grid, int const player, int const opponentBestAction){
+	int ret = opponentBestAction;
+	int	playerBest = -2;
+	int	playerBestAction = -2;
+
+	for (int i = 0; i < grid->column; i++) {
+		if (i != opponentBestAction) {
+			int tmp = eval(grid, i, player);
+			if (tmp > playerBest){
+				playerBest = tmp;
+				playerBestAction = i;
+			}
+		}
+	}
+	if (playerBestAction != -2)
+		ret = playerBestAction;
+	return ret;
+}
+
 /* 
 ** evalue le score de tout les coups possibles pour l'IA, garde le meilleur,
 ** puis fais la meme chose pour le joueur adverse
@@ -193,11 +217,19 @@ int	getBestAction(t_grid const *grid, int const player) {
 				opponentBestAction2 = i;
 			}
 		}
-		grid->map[playerBestAction][actionY] =  '.';
+		int	ret;
 		if (playerBest > opponentBest2)
-			return (playerBestAction + 1);
-		else
-			return (opponentBestAction + 1);
+			ret = (playerBestAction + 1);
+		else {
+			if (opponentBestAction != opponentBestAction2)
+				ret = (opponentBestAction + 1);
+			else {
+				ret = getNonMortalMove(grid, player, opponentBestAction);
+			}
+		}
+		grid->map[playerBestAction][actionY] =  '.';
+		return ret;
+
 	}
 	else
 		return (opponentBestAction + 1);
