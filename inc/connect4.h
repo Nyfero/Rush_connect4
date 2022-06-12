@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:51 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 20:40:13 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 20:49:23 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ int		errorMalloc(void);
 /*	Bonus	*/
 int		errorMlx(void);
 
-//ia.c
-int	evalDir(t_grid const *grid, int const action, int const player, int const dir);
-int	max(int x, int y);
-int	getBestAction(t_grid const *grid, int const player);
+//	ia.c
+int		evalDir(t_grid const *grid, int const action, int const player, int const dir);
+int		max(int x, int y);
+int		getBestAction(t_grid const *grid, int const player);
 int		eval(t_grid const *grid, int const action, int const player);
 t_aiVal	possibleAlign(t_grid const * grid, int const action, int const player, int const direction);
 void	decrementPos(int *x, int *y, int const direction);
