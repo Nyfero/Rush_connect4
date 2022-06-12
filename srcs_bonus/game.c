@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 14:30:51 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:53:16 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **	0: tour de l'IA
 */
 
+//Choisie aléatoirement le premier joueur
 int	pickPlayer(void) {
 	srand(time(NULL));
 	int	turn = rand() % 2;
@@ -27,6 +28,7 @@ int	pickPlayer(void) {
 	return (turn);
 }
 
+//Lance la partie
 void	startGame(t_grid *grid) {
 	displayStart();
 	displayGrid(*grid);
@@ -34,14 +36,12 @@ void	startGame(t_grid *grid) {
 	
 	int	turn;
 	int	action;
-	// turn = pickPlayer();
-	turn = 1;
+	turn = pickPlayer();
 	while (1)
 	{
 		displayTurn(turn);
 		if (turn)
 		{
-			// evalWholeGrid(grid, 1);
 			action = askPlayer(*grid);
 			playerAction(grid, action);
 			displayGrid(*grid);
@@ -50,8 +50,7 @@ void	startGame(t_grid *grid) {
 		else
 		{
 			//IA do something
-			// evalWholeGrid(grid, 0);
-			action = askPlayer(*grid);
+			action = getBestAction(grid, 0);
 			botAction(grid, action);
 			displayGrid(*grid);
 			turn = 1;
@@ -62,6 +61,16 @@ void	startGame(t_grid *grid) {
 	displayEndOfGame(*grid, action, turn);
 }
 
+//Vérifie si la partie doit se termier
+int	endOfGame(t_grid const grid, int const action) {
+	if (mapFull(grid))
+	return (1);
+	if (someoneWin(grid, action))
+	return (1);
+	return (0);
+}
+
+//Vérifie si la grille est remplie
 int	mapFull(t_grid const grid) {
 	for(int i = 0; i < grid.column; i++)
 		if (grid.map[i][0] == '.')
@@ -69,14 +78,7 @@ int	mapFull(t_grid const grid) {
 	return (1);
 }
 
-int	endOfGame(t_grid const grid, int const action) {
-	if (mapFull(grid))
-		return (1);
-	if (someoneWin(grid, action))
-		return (1);
-	return (0);
-}
-
+//Vérifie si le joueur ou l'IA a gagner
 int	someoneWin(t_grid const grid, int const action) {
 	int		i = 0;
 	char	pion;

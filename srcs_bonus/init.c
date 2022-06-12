@@ -6,12 +6,13 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:22:48 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 13:30:25 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:50:54 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/connect4.h"
 
+//Initialise la grille de jeu
 void	initGrid(t_grid **grid, int line, int column) {
 	int		i, j;
 	
@@ -49,6 +50,7 @@ void	initGrid(t_grid **grid, int line, int column) {
 	ft_memset( (*grid)->scoreGrid, 0, column );
 }
 
+//Initialise la mlx et la structure qui la contient
 int	initMlx(t_mlx **data, int const column, int const line, t_grid *grid) {
 	(*data) = (t_mlx *)malloc(sizeof(t_mlx) * 1);
 	if (!(*data))
@@ -66,6 +68,7 @@ int	initMlx(t_mlx **data, int const column, int const line, t_grid *grid) {
 	return (0);
 }
 
+//Initialise toutes mes images
 int	initImg(t_mlx *data) {
 	data->board.img = mlx_xpm_file_to_image(data->mlx, "srcs_bonus/img/empty_board.xpm",
 		&data->board.width, &data->board.height);
@@ -78,6 +81,7 @@ int	initImg(t_mlx *data) {
 	return (0);
 }
 
+//Libère la mémoire de ma grille
 void	freeGrid(t_grid *grid) {
 	if (grid->map)
 		ft_free_ls(grid->map);
@@ -87,6 +91,7 @@ void	freeGrid(t_grid *grid) {
 		free(grid);
 }
 
+//Libère la mémoire de ma structure contenant la mlx
 void	freeMlx(t_mlx *data) {
 	if (data->board.img)
 		mlx_destroy_image(data->mlx, data->board.img);

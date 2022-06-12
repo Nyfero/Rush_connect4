@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:36 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/11 18:41:52 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:18:33 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int main(int ac, char **av) {
 
 	if (ac != 3)
 		return (errorArgNbr());
+	if (!isInt(av[1]) || !isInt(av[2]))
+		return(errorArgVal());
 	line = ft_atoi(av[1]);
 	column = ft_atoi(av[2]);
 	if (line < 6 || column < 7)

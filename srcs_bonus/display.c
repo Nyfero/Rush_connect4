@@ -6,12 +6,13 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:04:24 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 13:59:37 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:55:25 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/connect4.h"
 
+//Affiche le début du jeu
 void	displayStart(void) {
 	ft_putstr("..######...#######..##....##.##....##.########..######..########.##.......\n");
 	ft_putstr(".##....##.##.....##.###...##.###...##.##.......##....##....##....##....##.\n");
@@ -23,6 +24,7 @@ void	displayStart(void) {
 	ft_putstr("\n\n\n");
 }
 
+//Affiche la grille dans le terminal
 void	displayGrid(t_grid const grid) {
 	for(int j = 0; j < grid.line; j++)
 	{
@@ -58,6 +60,7 @@ void	displayGrid(t_grid const grid) {
 	*/
 }
 
+//Affiche le tour actuelle
 void	displayTurn(int	const turn) {
 	if (turn)
 		ft_putstr("\e[95mIt's your turn !\e[39m\n");
@@ -65,6 +68,7 @@ void	displayTurn(int	const turn) {
 		ft_putstr("\e[95mIt's IA turn !\e[39m\n");
 }
 
+//Affiche le résultat de la partie
 void	displayEndOfGame(t_grid const grid, int const action, int const turn) {
 	if (mapFull(grid))
 		ft_putstr("\e[93mThe map is full !\nIt's a draw !\e[39m\n");
@@ -77,6 +81,7 @@ void	displayEndOfGame(t_grid const grid, int const action, int const turn) {
 	}
 }
 
+//Affiche la grille sur l'interface graphique
 void	displayInterface(t_mlx *data) {
 	int	x, y;
 	
@@ -96,6 +101,7 @@ void	displayInterface(t_mlx *data) {
 	}
 }
 
+//Affiche une aide pour jouer
 void	displayHelp(void) {
 	ft_putstr("To move the pawn press the left or right arrows.\n");
 	ft_putstr("To validate your position press enter.\n");

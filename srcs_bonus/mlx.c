@@ -6,12 +6,13 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 21:39:59 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 15:20:23 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/12 16:47:04 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/connect4.h"
 
+//Lance le jeu si l'option interface graphique est activé
 void	startGameBonus(t_mlx *data) {
 	displayStart();
 	displayGrid(*data->grid);
@@ -29,6 +30,7 @@ void	startGameBonus(t_mlx *data) {
 	mlx_loop(data->mlx);
 }
 
+//Récupère les inputs du joueur pour l'interface graphique
 int	keyboard(int keycode, t_mlx *data) {
 	if (keycode == 65307)
 		closeGame(data);
@@ -50,8 +52,8 @@ int	keyboard(int keycode, t_mlx *data) {
 	return (0);
 }
 
+//Effectue l'action du joueur
 void	playerTurn(t_mlx *data) {
-	
 	playerAction(data->grid, data->cursor + 1);
 	displayGrid(*data->grid);
 	displayInterface(data);
@@ -63,15 +65,18 @@ void	playerTurn(t_mlx *data) {
 	displayTurn(0);
 }
 
+//Effectue l'action de l'IA
 void	IATurn(t_mlx *data) {
-	
+	int action = getBestAction(data->grid, 0);
+
+	botAction(data->grid, action);
 	displayGrid(*data->grid);
 	displayInterface(data);
-	// if (endOfGame(*data->grid, data->cursor + 1))
-	// {
-	// 	displayEndOfGame(*data->grid, data->cursor + 1, 1);
-	// 	closeGame(data);
-	// }
+	if (endOfGame(*data->grid, action))
+	{
+		displayEndOfGame(*data->grid, action, 1);
+		closeGame(data);
+	}
 	displayTurn(1);
 }
 
@@ -86,8 +91,7 @@ void	moveRight(t_mlx *data) {
 }
 
 int	closeGame(t_mlx *data) {
-	mlx_loop_end(data->mlx);
-	// freeMlx(data);
-	// exit(0);
+	freeMlx(data);
+	exit(0);
 	return (0);
 }

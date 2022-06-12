@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 13:45:53 by acabiac          ###   ########.fr       */
+/*   Updated: 2022/06/12 16:04:06 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ void	startGame(t_grid *grid) {
 	
 	int	turn;
 	int	action;
-	// turn = pickPlayer();
-	turn = 1;
+	turn = pickPlayer();
 	while (1)
 	{
 		displayTurn(turn);
 		if (turn)
 		{
-		//	evalWholeGrid(grid, 1);
 			action = askPlayer(*grid);
 			playerAction(grid, action);
 			displayGrid(*grid);
