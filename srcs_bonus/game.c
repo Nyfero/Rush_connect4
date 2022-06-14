@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 12:56:47 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 21:41:38 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/14 16:16:12 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	startGame(t_grid *grid) {
 		if (turn)
 		{
 			action = askPlayer(*grid);
+			if (action == -1)
+				return ;
 			playerAction(grid, action);
 			displayGrid(*grid);
 			turn = 0;

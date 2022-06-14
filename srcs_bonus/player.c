@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:38:56 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:48:44 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/14 16:14:10 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	askPlayer(t_grid const grid) {
 				}
 			}
 		}
+		else
+			return (-1);
 		free(input);
 		ft_putstr("Please enter a valid value: ");
 		input = get_next_line(0);
