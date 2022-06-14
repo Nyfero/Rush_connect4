@@ -6,7 +6,7 @@
 /*   By: gsap <gsap@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 13:38:56 by gsap              #+#    #+#             */
-/*   Updated: 2022/06/12 17:48:44 by gsap             ###   ########.fr       */
+/*   Updated: 2022/06/14 16:11:24 by gsap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	playerAction(t_grid *grid, int const action) {
 	grid->map[action - 1][i - 1] = 'X';
 }
 
+#include <stdio.h>
 //Place le pion de l'IA
 void	botAction(t_grid *grid, int const action) {
 	int	i = 0;
 
+	printf("action: %d\n", action);
 	while (grid->map[action - 1][i] == '.')
 		i++;
 	grid->map[action - 1][i - 1] = 'O';
@@ -51,6 +53,8 @@ int	askPlayer(t_grid const grid) {
 				}
 			}
 		}
+		else
+			return (-1);
 		free(input);
 		ft_putstr("Please enter a valid value: ");
 		input = get_next_line(0);

@@ -111,7 +111,7 @@ fclean: clean
 	$(HIDE) $(RM) $(NAME)
 	$(HIDE) $(RM) $(BONUS)
 	$(HIDE) make fclean -C $(LIBFT_DIR)
-	$(HIDE) make clean -C $(MLX_PATH)
+	-$(HIDE) make clean -C $(MLX_PATH)
 	@ echo "$(RED)\n        *** Remove $(NAME) ***\n$(END)"
 
 re: fclean all

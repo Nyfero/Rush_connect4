@@ -224,7 +224,7 @@ int	getBestAction(t_grid const *grid, int const player) {
 			if (opponentBestAction != opponentBestAction2)
 				ret = (opponentBestAction + 1);
 			else {
-				ret = getNonMortalMove(grid, player, opponentBestAction);
+				ret = getNonMortalMove(grid, player, opponentBestAction) + 1;
 			}
 		}
 		grid->map[playerBestAction][actionY] =  '.';
